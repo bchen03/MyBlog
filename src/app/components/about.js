@@ -22,3 +22,6 @@ export class About extends React.Component
     }
 }
 
+export let About2 = () => (
+    <div>About2</div>
+);

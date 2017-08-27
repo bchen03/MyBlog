@@ -8,7 +8,7 @@ import { Layout } from "./components/layout";
 
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/styles.css';
+import '../css/styles.scss';
 
 class App extends React.Component {
     render() {

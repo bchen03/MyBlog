@@ -6,6 +6,24 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var SRC_DIR = path.resolve(__dirname, "src");
 var DIST_DIR = path.resolve(__dirname, "dist");
 
+var isProd = process.env.NODE_ENV === "production";
+
+var cssDev = ['style-loader', 'css-loader', 'sass-loader'];
+var cssProd = ExtractTextPlugin.extract({    
+    fallback: "style-loader",
+    use: [
+        {
+            loader: "css-loader"
+        },
+        {
+            loader: "sass-loader"
+        }
+    ]
+});
+
+var cssConfig = isProd ? cssProd : cssDev;
+
+
 var config = {
     entry: SRC_DIR + "/app/index.js",
     output: {
@@ -25,21 +43,17 @@ var config = {
                 ],
                 loader: "babel-loader",
                 options: {
-                    presets: ["react", "es2015", "stage-2"]
+                    presets: [
+                        ["react"], 
+                        ["es2015", { modules: false }],  // Enable tree-shaking
+                        ["stage-2"] 
+                    ]
                 }
             },
             {
-                test: /\.css$/, 
-                use: ["style-loader", "css-loader"]  
+                test: /\.(scss|css)$/, 
+                use: cssConfig
             },
-/*            {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: "css-loader"
-                })
-            },
-*/            
             {
                 test: /\.(gif|jpg|png|svg)$/, 
                 use: [
@@ -54,7 +68,7 @@ var config = {
             {
                 test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
                 use: [
-                    {
+                        {
                         loader: 'file-loader',
                         options: {
                             name: '[name].[ext]',
@@ -84,9 +98,9 @@ var config = {
             //Util: "exports-loader?Util!bootstrap/js/dist/util",
             //Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown",
         }),
-        new ExtractTextPlugin({
-            filename: "app.css",
-            disable: true,
+        new ExtractTextPlugin({     // Generate separate .css and not added to bundle.js
+            filename: "app.[contenthash].css",
+            disable: !isProd,
             allChunks: true
         })
     ]    
