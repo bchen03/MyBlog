@@ -1,8 +1,56 @@
 import React from "react";
 import { BlogSnippet } from "./blogsnippet";
+import { times } from 'lodash';
+
+const MAX_BODY_CONTENT_COUNT = 5;
+const MAX_SIDENAV_CONTENT_COUNT = 3;
+
+var bodyContent = times(MAX_BODY_CONTENT_COUNT, (index) => {
+    return (
+        <div className="row">
+            <div className="col-md-12">
+                This is some data in main pane. gksdlm stm s st s s 
+                tm stms' tab-contents ,s  STsdt sdtsdt ss ysd sY 
+                ,sd ,  t sdt sd sd gse sdtg s sd se sd sdy sdy sd 
+                ts tsdt sd tsts ts tsdt sdt s sTs stsdt  sdtsdt sidebar tsdt 
+                STsd SDy sD hsd hsdxh sdhsdz hsdr hsd sdxh sdh sddhasdh 
+                SDHzxd hsdhsdxz hsd hsdz hzdxhdxzh zsdxh zxdh 
+                <br />
+                <br />
+            </div>
+        </div>
+    );
+});
+
+var sidenavContent  = times(MAX_SIDENAV_CONTENT_COUNT, (index) => {
+    return (
+        <div className="row">
+            <div className="col-md-12">
+                This is some data in sidebar.<br /><br />
+            </div>
+        </div>
+    );
+});
 
 export let Home = () => (
     <div>
+        <div className="row">
+            <div className="col-md-9">
+                <div className="container-fluid">
+                    {bodyContent}
+                </div>
+            </div>
+            <div className="col-md-1"></div>
+            <div className="col-md-2">
+                <div className="container-fluid">
+                    {sidenavContent}
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <br />
+
         <BlogSnippet title={"Redux"} date={"January 12, 2017"}>{snippet1}</BlogSnippet>
         <BlogSnippet title={"RabbitMQ"} date={"March 20, 2017"}>{snippet2}</BlogSnippet>
     </div>    
