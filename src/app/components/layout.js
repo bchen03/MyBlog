@@ -6,12 +6,12 @@ import { About } from "./about";
 import { NoMatch } from "./nomatch"
 
 export class Layout extends React.Component {
-/*
+
     componentWillMount() {
         console.log('Component WILL MOUNT!')
     }
 
-    componentDidMount() {
+/*    componentDidMount() {
         console.log('Component DID MOUNT!')
     }
 

@@ -1,11 +1,11 @@
 import React from "react";
 import { BlogSnippet } from "./blogsnippet";
-import { times } from 'lodash';
+import { times, flatten } from 'lodash';
 
 const MAX_BODY_CONTENT_COUNT = 5;
-const MAX_SIDENAV_CONTENT_COUNT = 3;
+const MAX_SIDENAV_CONTENT_COUNT = 1;
 
-var bodyContent = times(MAX_BODY_CONTENT_COUNT, (index) => {
+var bodyItems = times(MAX_BODY_CONTENT_COUNT, (index) => {
     return (
         <div className="row">
             <div className="col-md-12">
@@ -22,37 +22,46 @@ var bodyContent = times(MAX_BODY_CONTENT_COUNT, (index) => {
     );
 });
 
-var sidenavContent  = times(MAX_SIDENAV_CONTENT_COUNT, (index) => {
-    return (
+var bodyContent = (
+    <div className="container-fluid">
+        {bodyItems}
+    </div>
+);
+
+var sidenavContent = (
+    <div className="container-fluid">
         <div className="row">
             <div className="col-md-12">
-                This is some data in sidebar.<br /><br />
+                <div>Popular Tags</div>
             </div>
         </div>
-    );
-});
+        <div className="row">
+            <div className="col-md-12">
+                <span className="badge badge-primary home-badge">C#</span>
+                <span className="badge badge-primary home-badge">ASP.NET</span>
+                <span className="badge badge-primary home-badge">React</span>
+                <span className="badge badge-primary home-badge">Angular</span>
+                <span className="badge badge-primary home-badge">Redux</span>
+            </div>
+        </div>
+    </div>);
 
 export let Home = () => (
     <div>
         <div className="row">
-            <div className="col-md-9">
-                <div className="container-fluid">
-                    {bodyContent}
-                </div>
+            <div className="col-md-10">
+                {bodyContent}
+                <BlogSnippet title={"Redux"} date={"January 12, 2017"}>{snippet1}</BlogSnippet>
+                <BlogSnippet title={"RabbitMQ"} date={"March 20, 2017"}>{snippet2}</BlogSnippet>
             </div>
-            <div className="col-md-1"></div>
             <div className="col-md-2">
-                <div className="container-fluid">
-                    {sidenavContent}
-                </div>
+                {sidenavContent}
             </div>
         </div>
 
         <br />
         <br />
 
-        <BlogSnippet title={"Redux"} date={"January 12, 2017"}>{snippet1}</BlogSnippet>
-        <BlogSnippet title={"RabbitMQ"} date={"March 20, 2017"}>{snippet2}</BlogSnippet>
     </div>    
 );
 

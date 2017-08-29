@@ -13,12 +13,19 @@ import '../css/styles.scss';
 class App extends React.Component {
     render() {
         return (
-            <div className="container">
-                <Header />
-                 <BrowserRouter>
-                    <Layout />
-                </BrowserRouter>
-                <Footer />
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-md-1"></div>
+                    <div className="col-md-10">
+                    <div className="container-fluid"/>
+                        <Header />
+                        <BrowserRouter>
+                            <Layout />
+                        </BrowserRouter>
+                        <Footer />
+                    </div>
+                    <div className="col-md-1"></div>
+                </div>
             </div>
         );
     }

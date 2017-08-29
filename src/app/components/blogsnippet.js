@@ -5,7 +5,7 @@ export class BlogSnippet extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container-fluid">
                 <div className="row">
                     <h4 className="col-md-6">{this.props.title}</h4>
                     <div className="col-md-6 text-right text-muted small">{this.props.date}</div>
