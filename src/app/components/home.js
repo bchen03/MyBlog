@@ -22,7 +22,31 @@ export class Home extends React.Component {
 
     componentWillMount() {
         console.log('Home Component WILL MOUNT!')
+        
+        // This works from here, no need to call setState()
+        //this.state.bodyContent = [];
+    }
 
+    componentDidMount() {
+        console.log('Home Component DID MOUNT!')
+        var that = this;
+
+        // Using jQuery.ajax to call api
+        $.ajax({
+            url: "http://localhost:88/api/blogs",
+            dataType: "json",
+            success: function(resp) {
+                console.log("blogs api call:", resp);
+                //setTimeout(function() {
+                    that.setState({ bodyContent: that.mapBodyContent(resp.Blogs) });
+                //}, 2000);
+            },
+            error: function(req, status, err) {
+                console.log("blogs api error:", status, err);
+            }
+        });
+
+/* For testing or when api is not available
         var tempContent = [
             { 
                 Title: "Redux", 
@@ -63,7 +87,8 @@ export class Home extends React.Component {
             
         ];
 
-        this.state.bodyContent = this.mapBodyContent(tempContent)
+        this.setState({ bodyContent: this.mapBodyContent(tempContent) });
+*/        
     }
     
     mapBodyContent(bodyContent) {
