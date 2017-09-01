@@ -4,6 +4,7 @@ import { Home } from "./home"
 import { Archives } from "./archives"
 import { About } from "./about";
 import { NoMatch } from "./nomatch"
+import { BlogDetail } from "./blogdetail";
 
 export class Layout extends React.Component {
 
@@ -39,33 +40,37 @@ export class Layout extends React.Component {
 
     render() {
         return (
-            <div>   
-                <nav className="navbar navbar-expand-sm navbar-light bg-light">
-                    <a className="navbar-brand" href="#">&nbsp;</a>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" 
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav mr-auto">
-                            <li className="nav-item nav-link active"><NavLink to="/">Home</NavLink></li>
-                            <li className="nav-item nav-link"><NavLink to="/archives">Archives</NavLink></li>
-                            <li className="nav-item nav-link"><NavLink to="/about">About</NavLink></li>
-                        </ul>
+            <div>  
+                <div className="row align-items-center header-bar">
+                    <div className="col-md-3 header-bar-text">
+                        Blogs
                     </div>
-                </nav>
-                <hr/>
-                <main>
-                    <Switch>
-                        <Route path="/" exact component={Home}></Route>
-                        <Route path="/archives" component={Archives}></Route>
-                        <Route path="/about" component={About}></Route>
-                        <Route component={NoMatch}></Route>
-                    </Switch>
-                </main>
+                    <div className="col-md-8">
+                        <NavLink className="subheader-nav" to="/">Home</NavLink>
+                        <NavLink className="subheader-nav" to="/archives">Archives</NavLink>
+                        <NavLink className="subheader-nav" to="/about">About</NavLink>
+                    </div>
+                </div>
+                <div className="row">
+                    <main className="col-md-12">
+                        <Switch>
+                            <Route path="/" exact component={Home}></Route>
+                            <Route path="/archives" component={Archives}></Route>
+                            <Route path="/about" component={About}></Route>
+                            <Route path="/detail/:id" component={BlogDetail}></Route>
+                            <Route component={NoMatch}></Route>
+                        </Switch>
+                    </main>
+                </div>
             </div>
         );
     }
 }
 
+const BlogRoutes = ({ component, ...rest }) => {
+    return (
+      <div>
+        <Route {...rest} render={ () => React.createElement(component) } />
+      </div>
+    );
+  };

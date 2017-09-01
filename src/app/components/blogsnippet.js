@@ -3,11 +3,25 @@ import PropTypes from "prop-types";
 
 export class BlogSnippet extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+    }
+
+    getHref() {
+        return "/detail/" + this.props.blogid;
+    }
+
+    // Method to use router history to load specific detail component
+    loadBlogDetail() {
+        this.props.history.push("/detail/" + this.props.blogid);
+    }
+
     render() {
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <h4 className="col-md-6">{this.props.title}</h4>
+                    <h4 className="col-md-6"><a className="blog-title-link" href={this.getHref()}>{this.props.title}</a></h4>
                     <div className="col-md-6 text-right text-muted small">{this.props.date}</div>
                 </div>
                 <div>
@@ -18,6 +32,7 @@ export class BlogSnippet extends React.Component {
             </div>            
         )
     }
+
 }
 
 BlogSnippet.propTypes = {
@@ -25,3 +40,4 @@ BlogSnippet.propTypes = {
     title: PropTypes.string,
     date: PropTypes.string
 };
+

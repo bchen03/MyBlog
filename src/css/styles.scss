@@ -5,6 +5,11 @@ $margin-top: 1.3rem;
     margin-top: $margin-top;
 }
 
+.blog-title-link {
+    color: black !important;
+    text-decoration: none !important;
+}
+
 .logo {
     width: 2.0rem;
     height: 2.0rem;
@@ -18,9 +23,18 @@ $margin-top: 1.3rem;
     background-color: #222;
     color: white;
     margin-top: 20px;
+    margin-bottom: 40px;
     height: 2.6rem;
 }   
 
 .header-bar-text {
     margin-left: 50px;
 }
+
+.subheader-nav, a.subheader-nav:hover {
+    color: white !important;
+    text-decoration: none !important;
+    margin-right: 30px;
+}
+
+

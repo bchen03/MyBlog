@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { BlogSnippet } from "./blogsnippet";
 import { times, flatten } from 'lodash';
+import { Route, NavLink, Switch } from "react-router-dom";
+import { BlogSnippet } from "./blogsnippet";
+import { Sidenav } from './sidenav';
 
 export class Home extends React.Component {
 
@@ -33,22 +35,26 @@ export class Home extends React.Component {
 
         // Using jQuery.ajax to call api
         $.ajax({
-            url: "http://localhost:88/api/blogs",
+            url: "http://localhost:88/api/blogs?filter=condensed",
             dataType: "json",
             success: function(resp) {
-                console.log("blogs api call:", resp);
+                console.log("blogs?filter=condensed api call:", resp);
                 //setTimeout(function() {
                     that.setState({ bodyContent: that.mapBodyContent(resp.Blogs) });
                 //}, 2000);
             },
             error: function(req, status, err) {
-                console.log("blogs api error:", status, err);
+                console.log("blogs?filter=condensed api error:", status, err);
             }
         });
 
-/* For testing or when api is not available
-        var tempContent = [
+    }
+
+    testContent() {
+        // For testing or when api is not available
+        var content = [
             { 
+                Id: 1,
                 Title: "Redux", 
                 CreatedOn: "2017-08-29T17:10:57.7634159-04:00",
                 Content: "An implementation of Flux where data store listens for actions, " +
@@ -59,6 +65,7 @@ export class Home extends React.Component {
                 "Facebook Flux diagram: <a href=\"http://redux.js.org/\">http://redux.js.org/ ...</a> "
             },
             { 
+                Id: 2,
                 Title: "RabbitMQ", 
                 CreatedOn: "2017-08-29T17:10:57.7634159-04:00",
                 Content: "Docker RabbitMQ link: <a href=\"https://hub.docker.com/_/rabbitmq/\">https://hub.docker.com/_/rabbitmq/</a><br/> " +
@@ -67,6 +74,7 @@ export class Home extends React.Component {
                 "Show info log: docker logs testrabbit ...<br/>  "
             },
             { 
+                Id: 3,
                 Title: "Redux", 
                 CreatedOn: "2017-08-29T17:10:57.7634159-04:00",
                 Content: "An implementation of Flux where data store listens for actions, " +
@@ -77,6 +85,7 @@ export class Home extends React.Component {
                 "Facebook Flux diagram: <a href=\"http://redux.js.org/\">http://redux.js.org/ ...</a> "
             },
             { 
+                Id: 4,
                 Title: "RabbitMQ", 
                 CreatedOn: "2017-08-29T17:10:57.7634159-04:00",
                 Content: "Docker RabbitMQ link: <a href=\"https://hub.docker.com/_/rabbitmq/\">https://hub.docker.com/_/rabbitmq/</a><br/> " +
@@ -87,14 +96,21 @@ export class Home extends React.Component {
             
         ];
 
-        this.setState({ bodyContent: this.mapBodyContent(tempContent) });
-*/        
+        this.setState({ bodyContent: this.mapBodyContent(content) });
     }
-    
+
     mapBodyContent(bodyContent) {
+        // You can also pass the content as an attribute and
+        // put the <div> below in BlogSnippet, but this shows how
+        // to use this.props.children
         return bodyContent.map((item, index) => {
             return (
-                <BlogSnippet title={item.Title} date={item.CreatedOn} key={index}>
+                <BlogSnippet 
+                    title={item.Title} 
+                    history={this.props.history} 
+                    blogid={item.Id} 
+                    date={item.CreatedOn} 
+                    key={index}>
                     <div dangerouslySetInnerHTML={{ __html: item.Content }} />
                 </BlogSnippet>
             );
@@ -103,49 +119,25 @@ export class Home extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-10">
-                       {
-                           this.state.bodyContent ? 
-                           this.state.bodyContent : 
-                           <em>Loading...</em>
-                       } 
+                        {
+                            this.state.bodyContent ? 
+                            this.state.bodyContent : 
+                            <em>Loading...</em>      
+                        } 
                     </div>
                     <div className="col-md-2">
-                        {sidenavContent}
+                        <Sidenav />
                     </div>
                 </div>
-                <br />
-                <br />
             </div>    
         );
     }
 }
 
 Home.propTypes = {
-    bodyContent: PropTypes.element,
-    sidenavContent: PropTypes.element
+    bodyContent: PropTypes.element
 };
-
-var sidenavContent = (
-    <div className="container-fluid">
-        <div className="row">
-            <div className="col-md-12">
-                <div>Popular Tags</div>
-            </div>
-        </div>
-        <div className="row">
-            <div className="col-md-12">
-                <span className="badge badge-primary home-badge">C#</span>
-                <span className="badge badge-primary home-badge">ASP.NET</span>
-                <span className="badge badge-primary home-badge">React</span>
-                <span className="badge badge-primary home-badge">Angular</span>
-                <span className="badge badge-primary home-badge">Redux</span>
-            </div>
-        </div>
-    </div>
-);
-
-
 

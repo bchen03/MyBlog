@@ -13,10 +13,5 @@ export let Header = () => (
                 Sign In
             </div>
         </div>
-        <div className="row align-items-center header-bar">
-            <div className="col-md-12 header-bar-text">
-                Blogs
-            </div>
-        </div>
     </div>
 );
