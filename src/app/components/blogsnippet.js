@@ -18,10 +18,15 @@ export class BlogSnippet extends React.Component {
     }
 
     render() {
+        // Using onClick={() => {loadBlogDetail()}} is much faster loading the detail page
+        // (because href will call the server) but href={this.getHref()} will show the URL 
+        // in the status bar
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <h4 className="col-md-6"><a className="blog-title-link" href={this.getHref()}>{this.props.title}</a></h4>
+                    <h4 className="col-md-6">
+                        <a className="blog-title-link" onClick={() => {this.loadBlogDetail()}}>{this.props.title}</a>
+                    </h4>
                     <div className="col-md-6 text-right text-muted small">{this.props.date}</div>
                 </div>
                 <div>

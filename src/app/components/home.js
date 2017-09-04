@@ -19,6 +19,9 @@ export class Home extends React.Component {
             search: this.props.search || ""
         }
         
+        this.matchUrl = this.props.match.url;
+
+
         this.getBlogs = this.getBlogs.bind(this);
         this.setSearch = this.setSearch.bind(this);
         this.mapBlogContent = this.mapBlogContent.bind(this);
