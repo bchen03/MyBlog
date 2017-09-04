@@ -15,8 +15,9 @@ $margin-top: 1.3rem;
     height: 2.0rem;
 }
 
-.home-badge {
+.home-badge, .home-badge:hover {
     margin: .2rem;
+    cursor: pointer;
 }
 
 .header-bar {
@@ -36,5 +37,4 @@ $margin-top: 1.3rem;
     text-decoration: none !important;
     margin-right: 30px;
 }
-
 

@@ -28,7 +28,7 @@ var config = {
     entry: SRC_DIR + "/app/index.js",
     output: {
         path: DIST_DIR,
-        filename: "bundle.js",
+        filename: "bundle.[hash].js",
         publicPath: "/"
     },
     module: {

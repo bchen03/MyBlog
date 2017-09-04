@@ -54,7 +54,7 @@ export class Layout extends React.Component {
                 <div className="row">
                     <main className="col-md-12">
                         <Switch>
-                            <Route path="/" exact component={Home}></Route>
+                            <Route path="/" exact component={() => <Home search=""/>}></Route>
                             <Route path="/archives" component={Archives}></Route>
                             <Route path="/about" component={About}></Route>
                             <Route path="/detail/:id" component={BlogDetail}></Route>
