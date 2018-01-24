@@ -1,5 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {createStore, applyMiddleware, combineReducers} from 'redux';
+import {Provider} from 'react-redux';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 import { BrowserRouter } from "react-router-dom";
 import  PropTypes from "prop-types";
 import { Header } from "./components/header";
@@ -9,6 +13,30 @@ import { Layout } from "./components/layout";
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/styles.scss';
+
+
+// Actions
+
+
+// Reducers
+const blogReducer = (state = {}, action) => {
+    return state;
+};
+
+const sidenavReducer = (state = {}, action) => {
+    return state;
+};
+
+
+const store = createStore(
+    combineReducers({ blogReducer, sidenavReducer }), 
+    {},
+    applyMiddleware(
+        thunkMiddleware, 
+        createLogger()
+    )
+);
+
 
 class App extends React.Component {
     render() {
@@ -31,4 +59,9 @@ class App extends React.Component {
     }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>, 
+    document.getElementById("root")
+);

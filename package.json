@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run dev",
-    "dev": "cross-env NODE_ENV=development webpack -d && webpack-dev-server --content-base src/ --inline --hot --port 3002 --history-api-fallback --watch",
+    "dev": "cross-env NODE_ENV=development webpack -d && webpack-dev-server --content-base src/ --inline --hot --port 3003 --history-api-fallback --watch",
     "prod": "npm run clean && cross-env NODE_ENV=production webpack -p",
-    "dev:old": "webpack -d && copy src\\index.html dist && webpack-dev-server --content-base src/ --inline --hot --port 3002 --history-api-fallback",
+    "dev:old": "webpack -d && copy src\\index.html dist && webpack-dev-server --content-base src/ --inline --hot --port 3003 --history-api-fallback",
     "prod:old": "webpack -p && copy src\\index.html dist",
     "copy": "copy src\\index.html dist",
     "clean": "rimraf ./dist/*"
@@ -29,7 +29,11 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
     "react-router-dom": "^4.1.2",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
     "rimraf": "^2.6.1"
   },
   "devDependencies": {
@@ -41,7 +45,7 @@
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.5",
     "extract-text-webpack-plugin": "^3.0.0",
-    "file-loader": "^0.11.2",
+    "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.30.1",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",

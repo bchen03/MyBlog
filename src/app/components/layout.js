@@ -57,7 +57,8 @@ export class Layout extends React.Component {
                             <Route path="/" exact component={(props) => <Home search="" {...props} />}></Route>
                             <Route path="/archives" component={Archives}></Route>
                             <Route path="/about" component={About}></Route>
-                            <Route path="/detail/:id" component={BlogDetail}></Route>
+                            
+                            
                             <Route component={NoMatch}></Route>
                         </Switch>
                     </main>
