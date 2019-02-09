@@ -10,7 +10,8 @@
     "dev:old": "webpack -d && copy src\\index.html dist && webpack-dev-server --content-base src/ --inline --hot --port 3002 --history-api-fallback",
     "prod:old": "webpack -p && copy src\\index.html dist",
     "copy": "copy src\\index.html dist",
-    "clean": "rimraf ./dist/*"
+    "clean": "rimraf ./dist/*",
+    "prepare": "npm run prod"
   },
   "keywords": [
     "Programming",
